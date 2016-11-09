@@ -4,9 +4,11 @@
     "type": "library",
     "require": {
         "lempls/smart-objects": "@dev",
-        "doctrine/orm": "^2.5",
-        "laravel-doctrine/orm": "^1.2"
+        "doctrine/orm": "^2.5"
     },
     "license": "GNU",
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "autoload": {
+    "psr-4": {"Lempls\\": "src/"}
+    }
 }
