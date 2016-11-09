@@ -1,0 +1,12 @@
+{
+    "name": "lempls/smart-entity",
+    "description": "Laravel/Doctrine helpful class, uses lempls smart object.",
+    "type": "library",
+    "require": {
+        "lempls/smart-objects": "@dev",
+        "doctrine/orm": "^2.5",
+        "laravel-doctrine/orm": "^1.2"
+    },
+    "license": "GNU",
+    "minimum-stability": "stable"
+}
