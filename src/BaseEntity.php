@@ -7,6 +7,7 @@
 namespace Lempls\SmartEntity;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
 use Lempls\SmartObjects\BaseObject;
@@ -269,5 +270,51 @@ class BaseEntity extends BaseObject
         }
         return $entity;
     }
+
+    /**
+     * Fetches all records like $key => $value pairs
+     *
+     * @param array $criteria parameter can be skipped
+     * @param string $value mandatory
+     * @param array $orderBy parameter can be skipped
+     * @param string $key optional
+     * @return array
+     * @throws \Exception
+     */
+    public static function findPairs($criteria, $value = NULL, $orderBy = [], $key = NULL)
+    {
+        if (!is_array($criteria)) {
+            $key = $orderBy;
+            $orderBy = $value;
+            $value = $criteria;
+            $criteria = [];
+        }
+
+        if (!is_array($orderBy)) {
+            $key = $orderBy;
+            $orderBy = [];
+        }
+
+        if (empty($key)) {
+            $key = 'id';
+        }
+
+        $query = \EntityManager::getRepository(self::getClass())->createQueryBuilder('e')
+            ->where($criteria)
+            ->select("e.$value", "e.$key")
+            ->resetDQLPart('from')->from(self::getClass(), 'e', 'e.' . $key)
+            ->orderBy((array) $orderBy)
+            ->getQuery();
+
+        try {
+            return array_map(function ($row) {
+                return reset($row);
+            }, $query->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_ARRAY));
+
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
+    }
+
 
 }
