@@ -300,7 +300,7 @@ class BaseEntity extends BaseObject
         }
 
         $query = \EntityManager::getRepository(get_called_class())->createQueryBuilder('e')
-            ->where($criteria)
+//            ->whereCriteria($criteria)
             ->select("e.$value", "e.$key")
             ->resetDQLPart('from')->from(get_called_class(), 'e', 'e.' . $key)
             ->orderBy((array) $orderBy)
@@ -315,6 +315,5 @@ class BaseEntity extends BaseObject
             throw new \Exception($e);
         }
     }
-
 
 }
