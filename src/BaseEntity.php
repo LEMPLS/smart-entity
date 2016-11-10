@@ -299,10 +299,10 @@ class BaseEntity extends BaseObject
             $key = 'id';
         }
 
-        $query = \EntityManager::getRepository(self::getClass())->createQueryBuilder('e')
+        $query = \EntityManager::getRepository(get_called_class())->createQueryBuilder('e')
             ->where($criteria)
             ->select("e.$value", "e.$key")
-            ->resetDQLPart('from')->from(self::getClass(), 'e', 'e.' . $key)
+            ->resetDQLPart('from')->from(get_called_class(), 'e', 'e.' . $key)
             ->orderBy((array) $orderBy)
             ->getQuery();
 
