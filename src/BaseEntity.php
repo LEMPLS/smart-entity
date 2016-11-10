@@ -303,7 +303,7 @@ class BaseEntity extends BaseObject
 //            ->whereCriteria($criteria)
             ->select("e.$value", "e.$key")
             ->resetDQLPart('from')->from(get_called_class(), 'e', 'e.' . $key)
-            ->orderBy((array) $orderBy)
+//            ->orderBy((array) $orderBy)
             ->getQuery();
 
         try {
