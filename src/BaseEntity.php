@@ -193,7 +193,7 @@ class BaseEntity extends BaseObject
     private function eagerLoad($array)
     {
         foreach ($this as $key => $value) {
-            if (parent::readAnnotation($key, 'Serialize')) {
+            if (parent::readPropertyAnnotation($key, 'Serialize')) {
                 if(method_exists($value, '__load')) {
                     $value->__load();
                     $excluded = $this->cycleProtection($value);
