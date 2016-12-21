@@ -274,9 +274,9 @@ class BaseEntity extends BaseObject
     /**
      * Fetches all records like $key => $value pairs
      *
-     * @param array $criteria parameter can be skipped
+     * @param array|string $criteria parameter can be skipped
      * @param string $value mandatory
-     * @param array $orderBy parameter can be skipped
+     * @param array|string $orderBy parameter can be skipped
      * @param string $key optional
      * @return array
      * @throws \Exception
