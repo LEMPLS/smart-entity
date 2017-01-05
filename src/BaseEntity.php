@@ -169,7 +169,7 @@ class BaseEntity extends BaseObject
     public static function firstOrFail($options = [])
     {
         $return = self::findOne($options);
-        if ($return === []) throw new EntityNotFoundException('No entity found matching this filter.');
+        if ($return === null) throw new EntityNotFoundException('No entity found matching this filter.');
         return $return;
     }
 
