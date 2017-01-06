@@ -254,19 +254,19 @@ class BaseEntity extends BaseObject
         \EntityManager::flush($this);
     }
 
+
     /**
      * Creates new entity base on options.
      *
-     * @param $options
+     * @param      $options
+     * @param bool $allow_empty_strings
      * @return static
      */
-    public static function create($options)
+    public static function create($options, bool $allow_empty_strings = true)
     {
         $entity = new static;
         if (gettype($options) === 'array') {
-            foreach ($options as $key => $value) {
-                $entity->__set($key, $value);
-            }
+            $entity->setValues($options, $allow_empty_strings);
         }
         return $entity;
     }
