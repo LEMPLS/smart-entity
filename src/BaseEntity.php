@@ -89,19 +89,19 @@ class BaseEntity extends BaseObject
         }
     }
 
+
     /**
      * Finds object by filter, if doesn't exist, creates it, and updates it with second parameter.
      *
-     * @param $options
+     * @param       $options
      * @param array $update
+     * @param bool  $allow_empty_strings
      * @return object
      */
-    public static function updateOrCreate($options, array $update)
+    public static function updateOrCreate($options, array $update, bool $allow_empty_strings = true)
     {
         $entity = self::firstOrNew($options);
-        foreach ($update as $key => $value) {
-            $entity->__set($key, $value);
-        }
+        $entity->setValues($update, $allow_empty_strings);
         $entity->save();
         return $entity;
     }
