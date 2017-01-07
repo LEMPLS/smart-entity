@@ -101,7 +101,12 @@ class BaseEntity extends BaseObject
     public static function updateOrCreate($options, array $update, bool $allow_empty_strings = true)
     {
         $entity = self::firstOrNew($options);
-        $entity->setValues($update, $allow_empty_strings);
+        foreach ($update as $key => $value) {
+            if (!$allow_empty_strings && $value === "") {
+                continue;
+            }
+            $entity->__set($key, $value);
+        }
         $entity->save();
         return $entity;
     }
@@ -266,7 +271,12 @@ class BaseEntity extends BaseObject
     {
         $entity = new static;
         if (gettype($options) === 'array') {
-            $entity->setValues($options, $allow_empty_strings);
+            foreach ($options as $key => $value) {
+                if (!$allow_empty_strings && $value === "") {
+                    continue;
+                }
+                $entity->__set($key, $value);
+            }
         }
         return $entity;
     }
