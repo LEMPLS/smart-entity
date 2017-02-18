@@ -150,31 +150,35 @@ class BaseEntity extends BaseObject
         return $entity;
     }
 
+
     /**
      * Find array of entities or throw error.
      *
-     * @param array $options
+     * @param array  $options
+     * @param string $error_message
      * @return array
      * @throws EntityNotFoundException
      */
-    public static function findOrFail($options = [])
+    public static function findOrFail($options = [], $error_message = 'No entity found matching this filter.')
     {
         $return = self::find($options);
-        if ($return === [] || $return == null) throw new EntityNotFoundException('No entity found matching this filter.');
+        if ($return === [] || $return == null) throw new EntityNotFoundException($error_message);
         return $return;
     }
+
 
     /**
      * Find one entity or throw error.
      *
-     * @param array $options
+     * @param array  $options
+     * @param string $error_message
      * @return object
      * @throws EntityNotFoundException
      */
-    public static function firstOrFail($options = [])
+    public static function firstOrFail($options = [], $error_message = 'No entity found matching this filter.')
     {
         $return = self::findOne($options);
-        if ($return === null) throw new EntityNotFoundException('No entity found matching this filter.');
+        if ($return === null) throw new EntityNotFoundException($error_message);
         return $return;
     }
 
