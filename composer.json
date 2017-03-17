@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "lempls/smart-objects": "@dev",
-        "doctrine/orm": "^2.5"
+        "doctrine/orm": "^2.5",
+        "nette/utils": "^2.4"
     },
     "license": "GNU",
     "minimum-stability": "stable",
