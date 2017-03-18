@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass()
- * @property-read int|null $id
+ * @property-read int $id
  */
 class SmartIdEntity extends SmartEntity
 {
@@ -28,9 +28,9 @@ class SmartIdEntity extends SmartEntity
 
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
